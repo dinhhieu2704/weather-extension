@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Weather</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="weather-side">
+            <div class="weather-gradient"></div>
+            <div class="date-container">
+                <h2 class="date-dayname"><span id="today-left">------</span></h2>
+                <span class="date-day" id="date-day">-- --- ----</span>
+                <i class="location-icon" data-feather="map-pin"></i>
+                <span class="location" id="location">------, ---</span>
+            </div>
+            <div class="weather-container"><i class="weather-icon" data-feather="sun"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-sun weather-icon">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <h1 class="weather-temp" id="weather-temp">0°C</h1>
+                <h3 class="weather-desc" id="weather-desc"></h3>
+            </div>
+        </div>
+        <div class="info-side">
+            <div class="today-info-container">
+                <div class="today-info">
+                    <div class="precipitation">
+                        <span class="title">PRECIPITATION</span>
+                        <span class="value" id="precipitation">0 %</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="humidity">
+                        <span class="title">HUMIDITY</span>
+                        <span class="value" id="humidity">0 %</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wind">
+                        <span class="title">WIND</span>
+                        <span class="value" id="wind">0 m/s</span>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="week-container">
+                <ul class="week-list">
+                    <li class="active">
+                        <i class="day-icon" data-feather="sun"></i>
+                        <span class="day-name" id="day-name-1"></span>
+                        <span class="day-temp" id="day-temp-1">0°C</span>
+                    </li>
+                    <li>
+                        <i class="day-icon" data-feather="cloud"></i>
+                        <span class="day-name" id="day-name-2"></span>
+                        <span class="day-temp" id="day-temp-2">0°C</span>
+                    </li>
+                    <li>
+                        <i class="day-icon" data-feather="cloud-snow"></i>
+                        <span class="day-name" id="day-name-3"></span>
+                        <span class="day-temp" id="day-temp-3">0°C</span>
+                    </li>
+                    <li>
+                        <i class="day-icon" data-feather="cloud-rain"></i>
+                        <span class="day-name" id="day-name-4"></span>
+                        <span class="day-temp" id="day-temp-4">0°C</span>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="location-container">
+                <button class="location-button"> <i data-feather="map-pin"></i><span>Change location</span></button>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
