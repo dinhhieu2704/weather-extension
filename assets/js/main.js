@@ -1,5 +1,7 @@
 const apiKey = "a24d6174d6fd64c2caed4fa5c656dadf";
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+const apiOneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall';
+const iconUrl = 'http://openweathermap.org/img/w/'
 let latitude;
 let longitude;
 
@@ -14,6 +16,7 @@ const monthName = month[currentDate.getMonth()];
 const year = currentDate.getFullYear();
 const dayOfWeekShort = weekdayShort[currentDate.getDay()];
 
+const weatherIcon = document.getElementById('weather-icon');
 const todayLeft = document.getElementById('today-left');
 const dateDay = document.getElementById('date-day');
 const dayName1 = document.getElementById('day-name-1');
@@ -50,23 +53,42 @@ function showPosition(position) {
     fetchWeather(null);
 }
 
+function getAllInfo(location) {
+    let url = `${apiOneCallUrl}?q=${location}&appid=${apiKey}&units=metric`;
+    if (!location) {
+        url = `${apiOneCallUrl}?lat=${latitude}&lon=${longitude}&exclude=daily&appid=${apiKey}`;
+    }
+
+    fetch(url).then(response => response.json()).then(data => {
+        if (data && data.length > 0) {
+            dayTemp2.textContent = `${Math.round((data.daily[1].temp.max + data.daily[1].temp.min) / 2)}°C`;
+            dayTemp3.textContent = `${Math.round((data.daily[2].temp.max + data.daily[2].temp.min) / 2)}°C`;
+            dayTemp4.textContent = `${Math.round((data.daily[3].temp.max + data.daily[3].temp.min) / 2)}°C`;
+        }
+    }).catch(error => {
+        console.error('Error fetching weather data:', error);
+    });
+}
+
 function fetchWeather(location) {
     let url = `${apiUrl}?q=${location}&appid=${apiKey}&units=metric`;
     if (!location) {
-        url = `${apiUrl}?lat=${latitude}&lon=${longitude}&&appid=${apiKey}&units=metric`;
+        url = `${apiUrl}?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
     }
 
     fetch(url).then(response => response.json()).then(data => {
         locationElement.textContent = `${data.name}, ${data.sys.country}`;
         weatherTemp.textContent = `${Math.round(data.main.temp)}°C`;
         weatherDesc.textContent = data.weather[0].description;
+        weatherIcon.src = `${iconUrl}/${data.weather[0].icon}.png`;
 
         precipitation.textContent = `${Math.round(data.clouds.all)}%`;
         humidity.textContent = `${data.main.humidity}%`;
         wind.textContent = `${Math.round(data.wind.speed * 100) / 100} m/s`;
-
         dayTemp1.textContent = `${Math.round(data.main.temp)}°C`;
     }).catch(error => {
         console.error('Error fetching weather data:', error);
     });
+
+    getAllInfo(location);
 }
